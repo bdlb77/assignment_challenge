@@ -7,4 +7,14 @@ class Device < ActiveRecord::Base
 	validates :status, presence: true
 
 
+	hash_new = {}
+	results.all.sort_by do |result| 
+		if !hash_new.has_key?(result['id'])
+	  	hash_new[result['id']] = 1
+	 	else 
+	 		hash_new[result['id']] += 1
+	 	end
+	end
+	 hash_new.sort_by {|k,v| v}.reverse.first(10)
+
 end
