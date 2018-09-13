@@ -11,11 +11,8 @@
 	    <% end %>
 	  </div>
 	</div>
-	<div class="row">
-		<h1 class="index-header">Our Most Popular Devices</h1>
-		<% @device_hash.each do |device_id, value| %>
-		 	<h3> Device ID: <%= device_id %></h3>
-		 	<p>Occcurences <%= value %></p>
-		 <%  end %>
+	<div class="row" >
+		<div class="device-container text-center">
 	</div>
+		<%= javascript_pack_tag "device" %>
 </div>
