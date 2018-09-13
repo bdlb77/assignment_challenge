@@ -1,8 +1,21 @@
 
-<div class="container text-center">
-<% @device_hash.each do |device_id, value| %>
- 	<h1> Device ID: <%= device_id %></h1>
- 	<h3>Occcurences <%= value %></h3>
- <%  end %>
-	
+
+<div class="container">
+	<div class="row">
+		<div class="form-wrapper" style="width: 400px; margin: 0 auto;">
+    	<h2>Flatpickr Demo</h2>
+	    <%= simple_form_for :search, method: "get" do |f| %>
+	      <%= f.input :pick_a_date, as: :string, required: false, input_html: {class: "datepicker"} %>
+	     
+	      <%= f.button :submit, "Go", class: "btn btn-primary" %>
+	    <% end %>
+	  </div>
+	</div>
+	<div class="row">
+		<h1 class="index-header">Our Most Popular Devices</h1>
+		<% @device_hash.each do |device_id, value| %>
+		 	<h3> Device ID: <%= device_id %></h3>
+		 	<p>Occcurences <%= value %></p>
+		 <%  end %>
+	</div>
 </div>

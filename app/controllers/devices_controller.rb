@@ -5,7 +5,6 @@ class DevicesController < ApplicationController
 		@compare = Device.week_comparison
 		# connect device hash to device model instances
 		@selected_devices = Device.device_select
-		raise
 	end
 
 	def show

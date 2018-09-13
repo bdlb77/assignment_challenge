@@ -15,8 +15,7 @@ gem 'sass-rails'
 gem 'simple_form'
 gem 'uglifier'
 gem 'webpacker'
-gem 'bootstrap', '~> 4.0.0'
-gem 'jquery-rails', '~> 4.3.1'
+
 
 
 group :development do
