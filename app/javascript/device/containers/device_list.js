@@ -5,9 +5,14 @@ import { bindActionCreators } from 'redux';
 import {fetchDevices} from '../actions'
 
 class DeviceList extends Component{
-	componentWillMount() {
-		this.props.fetchDevices();
-	}
+	// Add event listener on button when component mounts
+	// handle click when click happens => call fetch devices
+	// remove event listener when CDM
+
+	// componentDidMount() {
+	// 	this.props.fetchDevices()
+	// }
+
 	render(){
 		const the_devices = this.props.devices.map( device => {
 		const classes = `device ${device.id}`
@@ -16,12 +21,12 @@ class DeviceList extends Component{
 				<div className={classes} >
 					<div className="device-info">
 						<h3>{device.type}</h3>
+						<h5>{device.id}</h5>
 						<p>{device.status}</p>
 					</div>
 				</div>
 			</div>
 		)
-			
 		})
 		return(
 			<div className="device-list">

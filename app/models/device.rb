@@ -6,24 +6,30 @@ class Device < ActiveRecord::Base
 	validates :type, presence: true
 	validates :status, presence: true
 
-	def self.most_popular_devices
-		hash_new = {}
-		# !!!! HARD CODED THE DAY!!!!!!
-		day_select(10).each do  |result| 
-			if !hash_new.has_key?(result['id'])
-				hash_new[result['id']] = 1
-			else 
-				hash_new[result['id']] += 1
-			end
-		end
-		hash_new = hash_new.sort_by { |k, v| -k }.first(10).to_h
-	end
+		
 
-	def self.week_comparison
-		hash_new = most_popular_devices
+
+		def self.most_popular_devices(date)
+			# devices = Device.where(timestamp == date)
+			# devices 
+			
+			hash_new = {}
+			# !!!! HARD CODED THE DAY!!!!!!
+			day_select(date).each do  |result| 
+				if !hash_new.has_key?(result['id'])
+					hash_new[result['id']] = 1
+				else 
+					hash_new[result['id']] += 1
+				end
+			end
+			hash_new = hash_new.sort_by { |k, v| -v }.first(10).to_h
+		end
+
+	def self.week_comparison(date)
+		hash_new = most_popular_devices(date)
 		hash_old = {}
 
-		day_select(10-7).each do  |result| 
+		day_select(date).each do  |result| 
 				if !hash_old.has_key?(result['id'])
 					hash_old[result['id']] = 1
 				else 
@@ -55,25 +61,21 @@ class Device < ActiveRecord::Base
 		percentage_change_array
 	end
 
-	# def self.calculate_percentage_change(new_value, original_value)
-	# 	value_difference = new_value.to_f - original_value.to_f
-	# 	percentage_change = (value_difference.to_f / original_value.to_f * 100)
-	# end
-
 	def self.day_select(input)
 		## Find devices of specific day
 		Device.select{ |device| device.timestamp.day == input}
 	end
 
-	def self.device_select
+	def self.device_select(date)
 		array = []
-		hash_of_device_ids = most_popular_devices
+		hash_of_device_ids = most_popular_devices(date)
 		hash_of_device_ids.each do |id, occurence|
 			# receive just device instance from  hash of device ids
 			array << Device.where(id: id).uniq{|device| device.id}
 		end
 		array
 	end
+
 
 
 	def self.date_table
