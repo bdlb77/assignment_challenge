@@ -6,13 +6,8 @@ class Device < ActiveRecord::Base
 	validates :type, presence: true
 	validates :status, presence: true
 
-		
-
-
+	
 		def self.most_popular_devices(date)
-			# devices = Device.where(timestamp == date)
-			# devices 
-			
 			hash_new = {}
 			# !!!! HARD CODED THE DAY!!!!!!
 			day_select(date).each do  |result| 
@@ -26,10 +21,12 @@ class Device < ActiveRecord::Base
 		end
 
 	def self.week_comparison(date)
+	date - 7 > 0? percentage_change_hash  = {} :  percentage_change_hash = "Data is not available."
+
 		hash_new = most_popular_devices(date)
 		hash_old = {}
 
-		day_select(date).each do  |result| 
+		day_select(date - 7).each do  |result| 
 				if !hash_old.has_key?(result['id'])
 					hash_old[result['id']] = 1
 				else 
@@ -49,16 +46,15 @@ class Device < ActiveRecord::Base
 			end 
 			# sort old hash values by descending order
 		sorted_old_hash = sorted_old_hash.sort_by { |k, v| -k }.first(10).to_h
-		percentage_change_array = []
 		sorted_old_hash.each do |old_key, old_value|
 			hash_new.each do |new_key, new_value|
 				if old_key == new_key
 					# round up to 2nd decimal and reconvert back to float from string
-					percentage_change_array << sprintf('%.2f',((new_value.to_f - old_value.to_f) / old_value.to_f * 100)).to_f
+					percentage_change_hash["#{new_key}"] = sprintf('%.2f',((new_value.to_f - old_value.to_f) / old_value.to_f * 100)).to_f
 				end
 			end
 		end
-		percentage_change_array
+		percentage_change_hash
 	end
 
 	def self.day_select(input)

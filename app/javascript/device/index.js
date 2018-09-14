@@ -7,30 +7,41 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import {logger} from 'redux-logger';
 import reduxPromise from 'redux-promise';
 
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { createHistory as history } from 'history/createBrowserHistory'; 
+import { reducer as formReducer } from 'redux-form'; 
 // Internal
 import DeviceApp from './components/device_app';
+import DeviceShow from './containers/device_show';
 
 // Reducers
-import DeviceListReducer from './reducers/device_list_reducer'
+import DeviceListReducer from './reducers/device_list_reducer';
 
 const container = document.querySelector('.device-container')
 const initialState = {
-	devices: JSON.parse(container.dataset.devices)
+	devices: JSON.parse(container.dataset.devices),
+	comparePercentage: JSON.parse(container.dataset.occurrences)
 }
 
 const reducers = combineReducers({
-		devices: DeviceListReducer
+		devices: DeviceListReducer,
+		comparePercentage: (state = null, action) => state
 });
 
 const middlewares = applyMiddleware(reduxPromise,logger); 
 const store = createStore(reducers, initialState, middlewares);
 
 
-
 ReactDOM.render(
-	 <Provider store={store} >
-			<DeviceApp />
-	 </Provider>, container
+	<Provider store={store} >
+ 		<Router history={history}>
+ 			<Switch>
+      	<Route path="/" exact component={DeviceApp} ></Route>
+      	<Route path="/devices/:id" component={DeviceShow} ></Route>
+			</Switch>
+		</Router>
+	</Provider>,
+	container
 );
 
 

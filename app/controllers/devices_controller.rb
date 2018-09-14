@@ -4,6 +4,7 @@ class DevicesController < ApplicationController
 			@device_hash = Device.most_popular_devices(set_params)
 			@day_array = Device.date_table
 			@compare = Device.week_comparison(set_params)
+
 			# connect device hash to device model instances
 		 @selected_devices = Device.device_select(set_params)
 		end
