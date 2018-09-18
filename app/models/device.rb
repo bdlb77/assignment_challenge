@@ -1,35 +1,62 @@
 class Device < ActiveRecord::Base
 	# Disable STI and allow Type to be used as field name
-	self.inheritance_column = nil 
+	self.inheritance_column = nil
 	validates :timestamp, presence: true
 	validates :id, presence: true
 	validates :type, presence: true
 	validates :status, presence: true
 
-	
-		def self.most_popular_devices(date)
-			hash_new = {}
-			# !!!! HARD CODED THE DAY!!!!!!
-			day_select(date).each do  |result| 
-				if !hash_new.has_key?(result['id'])
-					hash_new[result['id']] = 1
-				else 
-					hash_new[result['id']] += 1
-				end
-			end
-			hash_new = hash_new.sort_by { |k, v| -v }.first(10).to_h
-		end
+
+	def self.most_popular_devices(array_of_devices)
+
+
+    # SQL GROUP BY id ? what does it return?
+    # [[id:1,  ] [id: 2]] count the occurences of the id (.length for arrays)
+	  # arrange by id's with most occurences .order(:DESC)
+    # take the first 10 from these and flatten the array if need be..
+    # =>  .first(10).flatten
+    # then calculate occurences from a week past
+    # where timestamp: timestamp.day - 7 from array of id's with most occurrences
+    # use percentage algorithm
+    # => sprintf('%.2f',((new_value.to_f - old_value.to_f) / old_value.to_f * 100)).to_f
+
+
+    # VIEW 2
+    # ------------
+    #  filter by uniq id.
+    #  have table of all uniq ids with their type and status
+    #  can filter by status (online/offline) and type (sensor/ gateway)
+    # =>  2 buttons... look into your code from forgetmenot
+    # display table with each day and total devices
+    # => Device.order(timestamp: :DESC)
+    # =>  see if date_table is accurate enough....
+
+
+
+    # hash_new = {}
+		# # !!!! HARD CODED THE DAY!!!!!!
+		# day_select(date).each do  |result|
+		# 	if !hash_new.has_key?(result['id'])
+		# 		hash_new[result['id']] = 1
+		# 	else
+		# 		hash_new[result['id']] += 1
+		# 	end
+		# end
+		# hash_new = hash_new.sort_by { |k, v| -v }.first(10).to_h
+
+
+	end
 
 	def self.week_comparison(date)
-	date - 7 > 0? percentage_change_hash  = {} :  percentage_change_hash = "Data is not available."
+	date - 7 > 0 ? percentage_change_hash = {} : percentage_change_hash = "Data is not available." #condition?
 
 		hash_new = most_popular_devices(date)
 		hash_old = {}
 
-		day_select(date - 7).each do  |result| 
+		day_select(date - 7).each do  |result|
 				if !hash_old.has_key?(result['id'])
 					hash_old[result['id']] = 1
-				else 
+				else
 					hash_old[result['id']] += 1
 				end
 		end
@@ -43,7 +70,7 @@ class Device < ActiveRecord::Base
 						end
 					end
 				end
-			end 
+			end
 			# sort old hash values by descending order
 		sorted_old_hash = sorted_old_hash.sort_by { |k, v| -k }.first(10).to_h
 		sorted_old_hash.each do |old_key, old_value|
@@ -86,7 +113,7 @@ class Device < ActiveRecord::Base
 				hash_of_days[device.timestamp.day] = 1
 			else
 				hash_of_days[device.timestamp.day] += 1
-			end  
+			end
 		end
 		# Returns hash of days and total device occurrences per day
 		hash_of_days.sort_by{ |k,v| k}.to_h
