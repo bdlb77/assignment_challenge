@@ -21,6 +21,7 @@ class Device < ActiveRecord::Base
     # => sprintf('%.2f',((new_value.to_f - old_value.to_f) / old_value.to_f * 100)).to_f
 
 
+
     # VIEW 2
     # ------------
     #  filter by uniq id.

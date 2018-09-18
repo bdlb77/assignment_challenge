@@ -8,8 +8,8 @@ import {logger} from 'redux-logger';
 import reduxPromise from 'redux-promise';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { createHistory as history } from 'history/createBrowserHistory'; 
-import { reducer as formReducer } from 'redux-form'; 
+import { createHistory as history } from 'history/createBrowserHistory';
+import { reducer as formReducer } from 'redux-form';
 // Internal
 import DeviceApp from './components/device_app';
 import DeviceShow from './containers/device_show';
@@ -29,7 +29,7 @@ const reducers = combineReducers({
 		form: formReducer
 });
 
-const middlewares = applyMiddleware(reduxPromise,logger); 
+const middlewares = applyMiddleware(reduxPromise,logger);
 const store = createStore(reducers, initialState, middlewares);
 
 

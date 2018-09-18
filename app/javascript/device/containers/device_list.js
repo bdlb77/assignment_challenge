@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import { bindActionCreators } from 'redux';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import {fetchDevices} from '../actions';
 import Device from '../components/single_device'
 class DeviceList extends Component{
@@ -11,7 +11,7 @@ class DeviceList extends Component{
 
 	render(){
 		let theDevices = null
-		if (this.props.devices){	
+		if (this.props.devices){
 	 		theDevices = ( this.props.devices.map( device => {
 			// let keyPercent;
 			// if(this.props.comparePercentage){
@@ -21,7 +21,7 @@ class DeviceList extends Component{
 			// 			 keyPercent = percentValue;
 			// 		}
 			// 	})
-			// }	
+			// }
 				// const percent = (keyPercent  ?`${keyPercent} % Change from last week` : `sorry no valid data`)				return (
 					return <Device key={device.id} type={device.type} status={device.status} />
 
