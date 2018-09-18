@@ -13,6 +13,7 @@ import { reducer as formReducer } from 'redux-form';
 // Internal
 import DeviceApp from './components/device_app';
 import DeviceShow from './containers/device_show';
+import DeviceDateInput from './containers/device_date_input';
 
 // Reducers
 import DeviceListReducer from './reducers/device_list_reducer';
@@ -25,7 +26,7 @@ const initialState = {
 
 const reducers = combineReducers({
 		devices: DeviceListReducer,
-		comparePercentage: (state = null, action) => state
+		form: formReducer
 });
 
 const middlewares = applyMiddleware(reduxPromise,logger); 

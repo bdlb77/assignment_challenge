@@ -1,19 +1,5 @@
 
 
-<div class="container">
-	<div class="row">
-		<div class="form-wrapper" style="width: 400px; margin: 0 auto;">
-			<h2>Flatpickr Demo</h2>
-			<%= simple_form_for :search, controller: 'api/v1/devices', action: :index,  method: "get" do |f| %>
-				<%= f.input :pick_a_date, as: :string, required: false, input_html: {class: "datepicker"} %>
-
-				<%= f.button :submit, "Go", class: "btn btn-primary form-submit" %>
-			<% end %>
-
-		</div>
-	</div>
-	<div class="row" >
-		<div class="device-container text-center" data-devices="<%= @selected_devices.to_json %>" data-occurrences="<%= @compare.to_json %>" ></div>
-	</div>
-	<%= javascript_pack_tag "device" %>
+<div class="device-container"  data-devices="<%= @devices.to_json %>" data-occurrences="<%= @compare.to_json %>">
 </div>
+<%= javascript_pack_tag "device" %>

@@ -15,7 +15,7 @@ class DeviceShow extends Component {
 					Back to Index
 				</Link>
 			</div>
-			)
+		)
 	}
 }
 function mapStateToProps(state, ownProps) {
