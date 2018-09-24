@@ -7,20 +7,34 @@ class Device < ActiveRecord::Base
 	validates :status, presence: true
 
 
-	def self.most_popular_devices(array_of_devices)
+	def self.most_popular_devices(search_date_begin, search_date_end, week_ago_begin, week_ago_end)
 
+		@devices = Device.where("timestamp BETWEEN '#{search_date_begin}' AND '#{search_date_end}'")
 
-    # SQL GROUP BY id ? what does it return?
-    # [[id:1,  ] [id: 2]] count the occurences of the id (.length for arrays)
-	  # arrange by id's with most occurences .order(:DESC)
-    # take the first 10 from these and flatten the array if need be..
-    # =>  .first(10).flatten
-    # then calculate occurences from a week past
-    # where timestamp: timestamp.day - 7 from array of id's with most occurrences
-    # use percentage algorithm
-    # => sprintf('%.2f',((new_value.to_f - old_value.to_f) / old_value.to_f * 100)).to_f
-
-
+		 @device_hash = @devices.group(:id).count
+     @device_hash = Hash[@device_hash.sort_by{|k,v| v}.reverse].first(10).to_h
+     @array_devices = []
+     @device_hash.each do |hash_device, occurence|
+     			@array_devices << [@devices.where(id: hash_device).first, occurence]
+     end
+     # find % change for most popular devices
+    if week_ago_begin != 0 && week_ago_end !=0
+   		@past_devices = Device.where("timestamp BETWEEN '#{week_ago_begin}' AND '#{week_ago_end}'")
+   		@past_device_hash = @past_devices.group(:id).count
+   		
+   		@device_with_change = []
+ 			percentage_change = 0
+   		#  take device hash w/ most pop devices and compare change to 1 week ago
+   		@device_hash.each do |new_device, new_occurence|
+ 				@past_device_hash.each do |old_device, old_occurence|
+ 					if old_device == new_device
+ 					percentage_change = sprintf('%.2f',((new_occurence.to_f - old_occurence.to_f) / old_occurence.to_f * 100)).to_f
+ 					@device_with_change << [@devices.where(id: new_device).first, percentage_change]
+ 					end
+   			end
+   		end
+    end
+    #  FIND A WAY TO JUST PULL DEVICE THEN ADD OCCURENCE SO YOU HAVE 10
 
     # VIEW 2
     # ------------
@@ -32,73 +46,11 @@ class Device < ActiveRecord::Base
     # => Device.order(timestamp: :DESC)
     # =>  see if date_table is accurate enough....
 
-
-
-    # hash_new = {}
-		# # !!!! HARD CODED THE DAY!!!!!!
-		# day_select(date).each do  |result|
-		# 	if !hash_new.has_key?(result['id'])
-		# 		hash_new[result['id']] = 1
-		# 	else
-		# 		hash_new[result['id']] += 1
-		# 	end
-		# end
-		# hash_new = hash_new.sort_by { |k, v| -v }.first(10).to_h
-
+     @device_with_change
 
 	end
 
-	def self.week_comparison(date)
-	date - 7 > 0 ? percentage_change_hash = {} : percentage_change_hash = "Data is not available." #condition?
 
-		hash_new = most_popular_devices(date)
-		hash_old = {}
-
-		day_select(date - 7).each do  |result|
-				if !hash_old.has_key?(result['id'])
-					hash_old[result['id']] = 1
-				else
-					hash_old[result['id']] += 1
-				end
-		end
-		# Sorting hash by descending values(occurrences)
-		sorted_old_hash = {}
-			 hash_old.each do |old_device_id, value|
-				hash_new.each do |array_of_device|
-					array_of_device.each do |new_device_id|
-						if old_device_id == new_device_id
-							  sorted_old_hash[old_device_id] = value
-						end
-					end
-				end
-			end
-			# sort old hash values by descending order
-		sorted_old_hash = sorted_old_hash.sort_by { |k, v| -k }.first(10).to_h
-		sorted_old_hash.each do |old_key, old_value|
-			hash_new.each do |new_key, new_value|
-				if old_key == new_key
-					# round up to 2nd decimal and reconvert back to float from string
-					percentage_change_hash["#{new_key}"] = sprintf('%.2f',((new_value.to_f - old_value.to_f) / old_value.to_f * 100)).to_f
-				end
-			end
-		end
-		percentage_change_hash
-	end
-
-	def self.day_select(input)
-		## Find devices of specific day
-		Device.select{ |device| device.timestamp.day == input}
-	end
-
-	def self.device_select(date)
-		array = []
-		hash_of_device_ids = most_popular_devices(date)
-		hash_of_device_ids.each do |id, occurence|
-			# receive just device instance from  hash of device ids
-			array << Device.where(id: id).uniq{|device| device.id}
-		end
-		array
-	end
 
 
 
