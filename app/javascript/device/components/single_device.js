@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Device  = (props) => {
 	const classes = `device ${props.id}`;
@@ -10,7 +9,6 @@ const Device  = (props) => {
 		);
 	return (
 		<div className="col-md-6">
-			<Link to={`/devices/${props.id}`} >
 				<div className={classes} >
 					<div className="device-info">
 						<h3>{props.type}</h3>
@@ -19,7 +17,6 @@ const Device  = (props) => {
 						{percentage}
 					</div>
 				</div>
-			</Link>
 		</div>
 	)
 }

@@ -12,7 +12,7 @@ import { createHistory as history } from 'history/createBrowserHistory';
 import { reducer as formReducer } from 'redux-form';
 // Internal
 import DeviceApp from './components/device_app';
-import DeviceShow from './containers/device_show';
+import DeviceByType from './containers/device_by_type';
 import DeviceDateInput from './containers/device_date_input';
 
 // Reducers
@@ -37,7 +37,7 @@ ReactDOM.render(
  		<Router history={history}>
  			<Switch>
       	<Route path="/" exact component={DeviceApp} ></Route>
-      	<Route path="/devices/:id" component={DeviceShow} ></Route>
+      	<Route path="/devices" component={DeviceByType} ></Route>
 			</Switch>
 		</Router>
 	</Provider>,

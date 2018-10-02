@@ -8,19 +8,26 @@ class DeviceDateInput extends Component{
     super(props);
 		
 		this.state = {
-		date: ''
+			date: ''
 		}
 	}	
 	
+	componentWillMount() {
+		this.setState({typeValue: this.props.typeValue})
+	}
 
-	handleInput = (event) => {
+	handleChange = (event) => {
 		this.setState({date: event.target.value})
 	};
 	
 	handleClick = (e) => {
 		e.preventDefault();
+		alert('Your favorite type is: ' + this.state.typeValue);
 		this.props.fetchDevices(this.state.date);
 	
+	}
+	handleType = (event) => {
+		this.setState({typeValue: event.target.value})
 	}
 
 	
@@ -35,7 +42,11 @@ class DeviceDateInput extends Component{
 					<input 
 						type="date"
 						value={this.state.date} 
-						onChange={this.handleInput} />
+						onChange={this.handleChange} />
+					<select>
+					<option value="online">Online</option>
+					<option value="offline">Offline</option>
+					</select>
 					<button 
 						className= "btn btn-primary"
 						type="submit"

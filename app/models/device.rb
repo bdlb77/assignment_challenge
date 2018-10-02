@@ -16,7 +16,6 @@ class Device < ActiveRecord::Base
 
 		@devices_final = week_comparison(week_ago_begin, week_ago_end, @device_hash)
 	end
-	#  device - 7.days 
 	
 	def self.week_comparison(week_ago_begin, week_ago_end, device_hash)
 		@device_with_change = []
@@ -30,7 +29,9 @@ class Device < ActiveRecord::Base
 			hashing['device'] = new_device_instance
 			@device_with_change << hashing
 		end
+     # flatten to allow for correct format for JSON
      @device_with_change.flatten
+
 	end
 
     # VIEW 2

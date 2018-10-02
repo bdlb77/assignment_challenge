@@ -21,7 +21,7 @@ class DeviceList extends Component{
 	 		}
 		}
 		return(
-				<div className="device-list container">
+				<div className="device-list">
 					{theDevices ? theDevices : 'Please Select A day'}
 				</div>
 			)
