@@ -1,16 +1,12 @@
 class Api::V1::DevicesController < ActionController::Base
 	def index
 		if params[:date]
-		  a = params[:date].split('-')
-			search_date_begin = DateTime.new(a[0].to_i, a[1].to_i, a[2].to_i)
-			search_date_end = DateTime.new(a[0].to_i, a[1].to_i, a[2].to_i, 23, 59, 59)
-			if a[2].to_i > 7
-				week_ago_begin =  DateTime.new(a[0].to_i, a[1].to_i, (a[2].to_i - 7))
-				week_ago_end =  DateTime.new(a[0].to_i, a[1].to_i, (a[2].to_i -  7 ), 23, 59, 59)
-			else
-				week_ago_begin = 0
-				week_ago_end = 0
-			end
+		  date = params[:date].split('-')
+
+			search_date_begin = DateTime.new(date[0].to_i, date[1].to_i, date[2].to_i)
+			search_date_end = DateTime.new(date[0].to_i, date[1].to_i, date[2].to_i, 23, 59, 59)
+			week_ago_begin = search_date_begin - 7.days
+			week_ago_end =  search_date_end - 7.days
 			@array_devices = Device.most_popular_devices(search_date_begin, search_date_end, week_ago_begin, week_ago_end)
 
       render json: @array_devices

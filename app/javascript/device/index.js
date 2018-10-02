@@ -21,7 +21,6 @@ import DeviceListReducer from './reducers/device_list_reducer';
 const container = document.querySelector('.device-container')
 const initialState = {
 	devices: JSON.parse(container.dataset.devices),
-	comparePercentage: JSON.parse(container.dataset.occurrences)
 }
 
 const reducers = combineReducers({
