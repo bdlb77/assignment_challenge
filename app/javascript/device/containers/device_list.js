@@ -12,17 +12,20 @@ class DeviceList extends Component{
 	render(){
 		let theDevices = null
 		if (this.props.devices){
-	 		theDevices = ( this.props.devices.map( device => {
+	 		if(this.props.devices.length > 0) {
+	 			theDevices = ( this.props.devices.map( device => {
 				return <Device key={device.device.id} id={device.device.id} type={device.device.type} status={device.device.status} percentage={device.percentage}/>
-
 			}))
-	 	}
-			return(
-				<div className="device-list">
-					{theDevices}
+			}else{
+	 			theDevices = "No Devices reported for this day. Pleas choose another day";
+	 		}
+		}
+		return(
+				<div className="device-list container">
+					{theDevices ? theDevices : 'Please Select A day'}
 				</div>
 			)
-	}
+		}
 }
 function mapStateToProps(state){
 	return {
