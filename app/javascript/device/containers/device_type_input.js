@@ -26,23 +26,27 @@ class DeviceTypeInput extends Component {
 	}
   render() {
     return (
-      <div>
-      	<form action="">
-					<select value={this.state.typeValue} onChange={this.handleType}>
+      <div className= "text-center">
+      	<form action="" className="device-input">
+					<select id="device-type-two" value={this.state.typeValue} onChange={this.handleType}>
 						<option value="sensor">Sensor</option>
 						<option value="gateway">Gateway</option>
 					</select>
-					<select value={this.state.statusValue} onChange={this.handleStatus}>
+					<select id="device-status-two" value={this.state.statusValue} onChange={this.handleStatus}>
 						<option value="online">Online</option>
 						<option value="offline">Offline</option>
 					</select>
 					<submit
-						className= "btn btn-primary btn-sm"
+						className= "btn btn-primary btn-sm btn-device-type"
 						type="submit"
 						onClick={this.handleClick}>Submit
 					</submit>
       	</form>
-      </div>
+      	<div className= "device-props-wrapper">
+      		<div className= "device-props">Type: {this.state.typeValue.toUpperCase()}</div>
+      		<div className= "device-props">Status: {this.state.statusValue.toUpperCase()}</div>
+      	</div>
+  	</div>
     );
   }
 }

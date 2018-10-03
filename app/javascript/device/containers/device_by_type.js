@@ -8,15 +8,9 @@ class DeviceByType extends Component {
 	render(){
 		return(
 			<div className= "container">
-				<div className="device" >
-					<DeviceTypeInput />
-				</div>
-				<div className="flex-contianer-devices">
-					<DeviceByTypeList />
-				</div>
-				<Link to="/">
-					Back to Index
-				</Link>
+				<Link to="/">Back to Index</Link>
+				<DeviceTypeInput />
+				<DeviceByTypeList />
 			</div>
 		)
 	}

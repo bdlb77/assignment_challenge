@@ -7,11 +7,11 @@ const DeviceApp = (props) => {
 		<div className="device-app container">
 			<div className="row">
 				<DeviceDateInput />
+				<Link to="/devices">Go To Device Type Search</Link>
 			</div>
 			<div className="row">
 				<DeviceList />
 			</div>
-			<Link to="/devices">Go To Device Type Search</Link>
 		</div>
 	)
 }

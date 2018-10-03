@@ -34,6 +34,16 @@ class Device < ActiveRecord::Base
 
 	end
 
+    # VIEW 2
+    # ------------
+    #  filter by uniq id.
+    #  have table of all uniq ids with their type and status
+    #  can filter by status (online/offline) and type (sensor/ gateway)
+    # =>  2 buttons... look into your code from forgetmenot
+    # display table with each day and total devices
+    # => Device.order(timestamp: :DESC)
+    # =>  see if date_table is accurate enough....
+
   def self.find_by_type_and_status(type,status)
   	
   	if type != "" && status != ""
@@ -44,24 +54,4 @@ class Device < ActiveRecord::Base
 
   	end
   end
-
-
-	def self.date_table
-		# order by timestamps through devices
-		# receive the day of  the  timestamp
-		# add incrementer and ++ on each device ocurrence for that day
-		# change Data into Table to Display (look into each_slice(7))
-		hash_of_days = {}
-		ordered_by_timestamps = Device.order(timestamp: :desc)
-		array_days = ordered_by_timestamps.map do |device|
-			if !hash_of_days.has_key?(device.timestamp.day)
-				hash_of_days[device.timestamp.day] = 1
-			else
-				hash_of_days[device.timestamp.day] += 1
-			end
-		end
-		# Returns hash of days and total device occurrences per day
-		hash_of_days.sort_by{ |k,v| k}.to_h
-	end
-
 end

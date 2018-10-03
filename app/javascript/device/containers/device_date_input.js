@@ -25,9 +25,7 @@ class DeviceDateInput extends Component{
 		this.props.fetchDevices(this.state.date);
 	
 	}
-	handleType = (event) => {
-		this.setState({typeValue: event.target.value})
-	}
+	
 
 	
 	render(){
@@ -42,10 +40,6 @@ class DeviceDateInput extends Component{
 						type="date"
 						value={this.state.date} 
 						onChange={this.handleChange} />
-					<select>
-					<option value="online">Online</option>
-					<option value="offline">Offline</option>
-					</select>
 					<button 
 						className= "btn btn-primary"
 						type="submit"
