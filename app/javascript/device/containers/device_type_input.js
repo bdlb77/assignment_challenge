@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { fetchDeviceTypesAndStatus } from '../actions';
 
 class DeviceTypeInput extends Component {
 
@@ -21,8 +22,7 @@ class DeviceTypeInput extends Component {
 	}
 	handleClick = (e) => {
 		e.preventDefault();
-		alert('Your favorite type is: ' + this.state.typeValue + ': and ' + this.state.statusValue);	
-			
+		this.props.fetchDeviceTypesAndStatus(this.state.typeValue, this.state.statusValue);
 	}
   render() {
     return (
@@ -37,7 +37,7 @@ class DeviceTypeInput extends Component {
 						<option value="offline">Offline</option>
 					</select>
 					<submit
-						className= "btn btn-primary"
+						className= "btn btn-primary btn-sm"
 						type="submit"
 						onClick={this.handleClick}>Submit
 					</submit>
@@ -46,5 +46,8 @@ class DeviceTypeInput extends Component {
     );
   }
 }
+function mapDispatchToProps(dispatch){
+	return bindActionCreators({fetchDeviceTypesAndStatus}, dispatch);
+}
 
-export default DeviceTypeInput;
+export default connect(null, mapDispatchToProps)(DeviceTypeInput);

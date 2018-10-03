@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { fetchDevices } from '../actions'
+import { fetchDevices } from '../actions';
+
 class DeviceDateInput extends Component{
 	 constructor(props){
-    // Required step: always call the parent class' constructor
     super(props);
 		
 		this.state = {
@@ -22,7 +22,6 @@ class DeviceDateInput extends Component{
 	
 	handleClick = (e) => {
 		e.preventDefault();
-		alert('Your favorite type is: ' + this.state.typeValue);
 		this.props.fetchDevices(this.state.date);
 	
 	}

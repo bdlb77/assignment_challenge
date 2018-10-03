@@ -1,0 +1,17 @@
+
+.data-container{
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.single-date-cell{
+	display: flex;
+	height: 100px;
+	width: 170px;
+	border: 1px solid #aaa;
+	border-radius: 5px;
+	padding: 10px 10px;
+	margin: 5px;
+	flex-direction: column;
+	justify-content: space-evenly;
+}

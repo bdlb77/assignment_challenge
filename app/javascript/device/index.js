@@ -17,6 +17,7 @@ import DeviceDateInput from './containers/device_date_input';
 
 // Reducers
 import DeviceListReducer from './reducers/device_list_reducer';
+import DevicesTypeReducer from './reducers/devices_type_reducer';
 
 const container = document.querySelector('.device-container')
 const initialState = {
@@ -24,6 +25,7 @@ const initialState = {
 }
 
 const reducers = combineReducers({
+		devicesByType: DevicesTypeReducer,
 		devices: DeviceListReducer,
 		form: formReducer
 });

@@ -10,7 +10,7 @@ class DeviceList extends Component{
 	// remove event listener when CDM
 
 	render(){
-		let theDevices = null
+		let theDevices = null;
 		if (this.props.devices){
 	 		if(this.props.devices.length > 0) {
 	 			theDevices = ( this.props.devices.map( device => {
@@ -32,8 +32,6 @@ function mapStateToProps(state){
 		devices: state.devices
 	}
 }
-// function mapDispatchToProps(dispatch){
-// 	return bindActionCreators({fetchDevices: fetchDevices}, dispatch);
-// }
+
 
 export default connect(mapStateToProps)(DeviceList);
