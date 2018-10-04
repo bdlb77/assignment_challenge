@@ -45,13 +45,20 @@ class Device < ActiveRecord::Base
     # =>  see if date_table is accurate enough....
 
   def self.find_by_type_and_status(type,status)
-  	
   	if type != "" && status != ""
-  		@devices_types = Device.where(type: type, status: status)  
-  		# organize device types into hash with array of occurnces per day.. 
-  		# contains hash of "day" and then list of devices for that day
-  		#  take last 30 days.. first(30) 
-  		@devices_types = @devices_types.group("DATE(timestamp)").count.sort_by{|k, v| k}.reverse!.first(30).to_h
+  		@devices_types = Device.where(type: type, status: status)
+  		
+  		# Check to see if current date is valid.. else run the dates given by csv file 
+  		may_date = @devices_types.order(timestamp: :DESC).first.timestamp
+  		current_date = Date.current
+  		if @devices_types.exists?(timestamp: current_date)
+  		# CHANGE CURRENT_DATE to DATE.TODAY to allow for correct TIME! of past 30 days
+  			@devices_types = @devices_types.where("timestamp BETWEEN '#{current_date - 30.days}' AND '#{current_date}'") 
+  			@devices_types = @devices_types.group("DATE(timestamp)").count.sort_by{|k, v| k}.reverse!.to_h
+  		else
+  			@devices_types = @devices_types.where("timestamp BETWEEN '#{may_date - 30.days}' AND '#{may_date}'") 
+  			@devices_types = @devices_types.group("DATE(timestamp)").count.sort_by{|k, v| k}.reverse!.to_h
+  		end
 
   	end
   end
