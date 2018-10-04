@@ -25,12 +25,15 @@ import { bindActionCreators } from 'redux';
     	)
     }else{
     	return (
-				dateData = "Waiting for Input..."
+				<div className="input-wait text-center"><strong>{dateData = "Please select type and status"}</strong></div>
     	)
     }
   return (
-    <div className="data-container">
-    	{dateData}
+    <div>
+      <h3 className="text-center">Total Device Occurences For Last 30 Days:</h3>
+      <div className="data-container">
+        {dateData}
+      </div>
     </div>
   );
   }

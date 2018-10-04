@@ -6,8 +6,8 @@ const DeviceApp = (props) => {
 	return(
 		<div className="device-app container">
 			<div className="row">
+				<Link to="/devices">Search Type and Status</Link>
 				<DeviceDateInput />
-				<Link to="/devices">Go To Device Type Search</Link>
 			</div>
 			<div className="row">
 				<DeviceList />

@@ -50,7 +50,8 @@ class Device < ActiveRecord::Base
   		@devices_types = Device.where(type: type, status: status)  
   		# organize device types into hash with array of occurnces per day.. 
   		# contains hash of "day" and then list of devices for that day
-  		@devices_types = @devices_types.group("DATE(timestamp)").count.sort_by{|k, v| k}.reverse!.to_h
+  		#  take last 30 days.. first(30) 
+  		@devices_types = @devices_types.group("DATE(timestamp)").count.sort_by{|k, v| k}.reverse!.first(30).to_h
 
   	end
   end

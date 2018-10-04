@@ -17,12 +17,17 @@ class DeviceList extends Component{
 				return <Device key={device.device.id} id={device.device.id} type={device.device.type} status={device.device.status} percentage={device.percentage}/>
 			}))
 			}else{
-	 			theDevices = "No Devices reported for this day. Pleas choose another day";
+	 			theDevices = <div className="text-center select-text">Please choose a valid day.</div>;
 	 		}
 		}
+		let selectText = (
+			<div className="text-center select-text">
+				Please Select A day
+			</div>			
+		)
 		return(
 				<div className="device-list">
-					{theDevices ? theDevices : 'Please Select A day'}
+					{theDevices ? theDevices : selectText}
 				</div>
 			)
 		}

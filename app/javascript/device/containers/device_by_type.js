@@ -7,8 +7,9 @@ import DeviceByTypeList from './device_by_type_list';
 class DeviceByType extends Component {
 	render(){
 		return(
-			<div className= "container">
-				<Link to="/">Back to Index</Link>
+			<div className= "container device-type-input">
+				<Link to="/"><i className="fa fa-home" aria-hidden="true"></i></Link>
+
 				<DeviceTypeInput />
 				<DeviceByTypeList />
 			</div>
