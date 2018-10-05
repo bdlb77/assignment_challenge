@@ -8,7 +8,6 @@ class DeviceList extends Component{
 	// Add event listener on button when component mounts
 	// handle click when click happens => call fetch devices
 	// remove event listener when CDM
-
 	render(){
 		let theDevices = null;
 		if (this.props.devices){

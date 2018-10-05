@@ -62,4 +62,12 @@ class Device < ActiveRecord::Base
 
   	end
   end
+
+  def self.fetch_data
+    require 'json'
+    require 'open-uri'
+    # retrieve data from API.. but must pass info from forms into params and receive there. 
+    # then open url to retrive data and push as data set from controller back
+
+  end
 end

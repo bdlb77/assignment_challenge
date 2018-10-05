@@ -18,7 +18,7 @@ import { bindActionCreators } from 'redux';
 					return (
 						<div className="single-date-cell">
 							<div>{date.toLocaleDateString("en-us", options)} </div>
-							<div>Occurence: {value}</div>
+							<div>Occurence: <strong>{value}</strong></div>
 						</div>
 					)
 		    })
