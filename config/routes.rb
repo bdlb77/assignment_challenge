@@ -3,9 +3,14 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
  	get "/devices", to: 'devices#index'
   # Route for API
+
   namespace :api, defaults: { format: :json } do
   	namespace :v1 do
   		resources :devices, only: [:index]
   	end
   end
+
+  require "sidekiq/web"
+  mount Sidekiq::Web => '/sidekiq'
+
 end
