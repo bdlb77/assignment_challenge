@@ -1,6 +1,7 @@
 class Device < ActiveRecord::Base
 	# Disable STI and allow Type to be used as field name
 	self.inheritance_column = nil
+  self.primary_key = :id
 	validates :timestamp, presence: true
 	validates :id, presence: true
 	validates :type, presence: true
