@@ -8,14 +8,12 @@ class DeviceByType extends Component {
 	render(){
 		return(
 			<div className= "container device-type-input">
-				<Link to="/"><i className="fa fa-home" aria-hidden="true"></i></Link>
-
+				<Link to="/" className="home-btn"><i className="fa fa-home" aria-hidden="true"></i></Link>
 				<DeviceTypeInput />
 				<DeviceByTypeList />
 			</div>
 		)
 	}
 }
-
 
 export default DeviceByType;

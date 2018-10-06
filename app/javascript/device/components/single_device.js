@@ -8,7 +8,7 @@ const Device  = (props) => {
 		props.percentage !== 0 ? `${Math.abs(props.percentage)}% ${inc}${dec} in usage` : 'not enough data'
 		);
 	return (
-		<div className="col-md-4 col-sm-6 col-xs-12">
+		<div className="col-md-4 col-sm-6 col-xs-12 device-container">
 				<div className={classes} >
 					<div className="device-info">
 						<h3 className="text-center">{props.id}</h3>

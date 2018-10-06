@@ -16,7 +16,7 @@ import { bindActionCreators } from 'redux';
 					let date = new Date(key)
 					date = new Date(date.setDate(date.getDate() + 1))
 					return (
-						<div className="single-date-cell">
+						<div className="single-date-cell col-xs-12">
 							<div>{date.toLocaleDateString("en-us", options)} </div>
 							<div>Occurence: <strong>{value}</strong></div>
 						</div>
@@ -31,7 +31,7 @@ import { bindActionCreators } from 'redux';
   return (
     <div>
       <h3 className="text-center">Total Device Occurences For Last 30 Days:</h3>
-      <div className="data-container">
+      <div className="data-container device-list">
         {dateData}
       </div>
     </div>

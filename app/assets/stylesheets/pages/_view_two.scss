@@ -17,8 +17,23 @@
 	flex-direction: column;
 	justify-content: space-evenly;
 }
-.device-type-input{
+
+.device-input{
+	   width: 300px;
+    margin: 0 auto;
+     padding: 5px;
+box-shadow: 1px 1px 1px #aaa;
+    border-radius: 5px;
 }
+.device-date-input{
+	  box-shadow: 1px 1px 1px #aaa;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 280px;
+    margin: 5px auto;
+}
+
 #device-type-two{
 	margin: 0 5px;
 }
@@ -34,4 +49,20 @@
 }
 .device-props{
 	margin: 10px 20px;
+}
+.fa-home{
+	color: black;
+	font-size: 20px;
+}
+.home-btn{
+  position: absolute;
+  left: 50%;
+  top: 5%;
+}
+
+@media screen and (max-width: 600px) {
+	.single-date-cell{
+		margin: 10px auto;
+		width: 250px;
+	}
 }

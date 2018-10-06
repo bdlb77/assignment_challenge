@@ -29,12 +29,8 @@ class DeviceDateInput extends Component{
 
 	
 	render(){
-	const style= {
-		width: '300px',
-		margin: 0 +' auto'
-	}
 		return(
-			<div className="form-wrapper" style={style} >
+			<div className="form-wrapper device-date-input">
 				<form action="">
 					<input 
 						type="date"

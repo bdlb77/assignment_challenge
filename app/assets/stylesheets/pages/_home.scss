@@ -26,3 +26,26 @@
   border: .5px solid #D5D5D5;
   text-decoration: none;
 }
+.device-list{
+	background: #eee;
+	box-shadow: 1px 1px 1px #ddd;
+}
+.device-container{
+	display: flex;
+	justify-content: center;
+}
+.devices-input{
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+.devices-input{
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.btn-search{
+	width: 300px;
+	margin: 0 auto;
+}
