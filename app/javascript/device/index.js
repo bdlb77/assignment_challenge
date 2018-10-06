@@ -20,9 +20,6 @@ import DeviceListReducer from './reducers/device_list_reducer';
 import DevicesTypeReducer from './reducers/devices_type_reducer';
 
 const container = document.querySelector('.device-container')
-const initialState = {
-	devices: JSON.parse(container.dataset.devices),
-}
 
 const reducers = combineReducers({
 		devicesByType: DevicesTypeReducer,
@@ -31,7 +28,7 @@ const reducers = combineReducers({
 });
 
 const middlewares = applyMiddleware(reduxPromise,logger);
-const store = createStore(reducers, initialState, middlewares);
+const store = createStore(reducers, {}, middlewares);
 
 
 ReactDOM.render(

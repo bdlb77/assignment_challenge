@@ -41,7 +41,7 @@ class DeviceDateInput extends Component{
 						value={this.state.date} 
 						onChange={this.handleChange} />
 					<button 
-						className= "btn btn-primary"
+						className= "btn btn-default"
 						type="submit"
 						onClick={this.handleClick}>Submit
 					</button>

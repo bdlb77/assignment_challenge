@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 
-#  Creation of devices to check use-cases and edge cases
+#  Creation of devices to check use-cases and edge cases3
 Device.create!(timestamp: '2017-04-30T00:00:10Z', id: 'a4a281ad', type: 'sensor', status: 'offline')
 Device.create!(timestamp: '2017-04-30T00:00:10Z', id: 'a4a281ad', type: 'sensor', status: 'offline')
 Device.create!(timestamp: '2018-10-6T00:00:10Z', id: 'a4a281ad', type: 'sensor', status: 'offline')

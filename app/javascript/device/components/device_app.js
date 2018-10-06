@@ -6,8 +6,10 @@ const DeviceApp = (props) => {
 	return(
 		<div className="device-app container">
 			<div className="row">
-				<Link to="/devices">Search Type and Status</Link>
-				<DeviceDateInput />
+				<div className="col-md-12 devices-input">
+					<Link to="/devices" className="btn btn-default">Search Type and Status</Link>
+					<DeviceDateInput />
+				</div>
 			</div>
 			<div className="row">
 				<DeviceList />
