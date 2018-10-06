@@ -1,0 +1,4 @@
+LoadDevicesJob:
+  cron: "*/10 * * * *"
+  class: "LoadDevicesJob"
+  queue: default
