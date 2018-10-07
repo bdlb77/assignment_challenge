@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom'; 
 import DeviceTypeInput from './device_type_input';
 import DeviceByTypeList from './device_by_type_list';
@@ -12,7 +11,7 @@ class DeviceByType extends Component {
 				<DeviceTypeInput />
 				<DeviceByTypeList />
 			</div>
-		)
+		);
 	}
 }
 

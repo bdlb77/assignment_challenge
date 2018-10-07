@@ -2,7 +2,7 @@ import React from 'react';
 import DeviceByDateList from '../containers/device_by_date_list';
 import DeviceDateInput from '../containers/device_date_input';
 import { Link } from 'react-router-dom'; 
-const DeviceApp = (props) => {
+const DeviceApp = () => {
 	return(
 		<div className="device-app container">
 			<div className="row">
@@ -11,9 +11,9 @@ const DeviceApp = (props) => {
 					<DeviceDateInput />
 				</div>
 			</div>
-				<DeviceByDateList />
+			<DeviceByDateList />
 		</div>
-	)
-}
+	);
+};
 
 export default DeviceApp;

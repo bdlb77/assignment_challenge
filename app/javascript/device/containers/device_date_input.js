@@ -25,9 +25,7 @@ class DeviceDateInput extends Component{
 		this.props.fetchDevices(this.state.date);
 	
 	}
-	
 
-	
 	render(){
 		return(
 			<div className="form-wrapper device-date-input">

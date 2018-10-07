@@ -13,7 +13,7 @@ class DeviceTypeInput extends Component {
   		statusValue: 'online'
   	}
   }
-  handleStatus = event => {
+  handleStatus = (event) => {
   	this.setState({statusValue: event.target.value})
   }
 
@@ -36,11 +36,11 @@ class DeviceTypeInput extends Component {
 						<option value="online">Online</option>
 						<option value="offline">Offline</option>
 					</select>
-					<submit
+					<button
 						className= "btn btn-primary btn-sm btn-device-type"
 						type="submit"
 						onClick={this.handleClick}>Submit
-					</submit>
+					</button>
       	</form>
       	<div className= "device-props-wrapper">
       		<div className= "device-props">Type: {this.state.typeValue.toUpperCase()}</div>

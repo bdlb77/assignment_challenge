@@ -13,18 +13,17 @@ import { reducer as formReducer } from 'redux-form';
 // Internal
 import DeviceApp from './components/device_app';
 import DeviceByType from './containers/device_by_type';
-import DeviceDateInput from './containers/device_date_input';
 
 // Reducers
 import DeviceListReducer from './reducers/device_list_reducer';
 import DevicesTypeReducer from './reducers/devices_type_reducer';
 
-const container = document.querySelector('.device-container')
+const container = document.querySelector('.device-container');
 
 const reducers = combineReducers({
-		devicesByType: DevicesTypeReducer,
-		devices: DeviceListReducer,
-		form: formReducer
+	devicesByType: DevicesTypeReducer,
+	devices: DeviceListReducer,
+	form: formReducer
 });
 
 const middlewares = applyMiddleware(reduxPromise,logger);
@@ -33,10 +32,10 @@ const store = createStore(reducers, {}, middlewares);
 
 ReactDOM.render(
 	<Provider store={store} >
- 		<Router history={history}>
- 			<Switch>
-      	<Route path="/" exact component={DeviceApp} ></Route>
-      	<Route path="/devices" component={DeviceByType} ></Route>
+		<Router history={history}>
+			<Switch>
+				<Route path="/" exact component={DeviceApp} ></Route>
+				<Route path="/devices" component={DeviceByType} ></Route>
 			</Switch>
 		</Router>
 	</Provider>,
