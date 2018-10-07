@@ -7,17 +7,11 @@ class Api::V1::DevicesController < ActionController::Base
       week_ago_begin = search_date_begin - 7.days
       week_ago_end = search_date_end - 7.days
       @array_devices = Device.most_popular_devices(search_date_begin, search_date_end, week_ago_begin, week_ago_end)
-
-      render json: @array_devices
     elsif params[:type] || params[:status]
-      type = params[:type]
-      status = params[:status]
-
-      @array_devices = Device.find_by_type_and_status(type, status)
-      render json: @array_devices
+      @array_devices = Device.find_by_type_and_status(params[:type], params[:status])
     else
-      @devices = Device.all.first(10).flatten
-      render json: @devices
+      @array_devices = Device.all.first(10).flatten
     end
+    render json: @array_devices
   end
 end

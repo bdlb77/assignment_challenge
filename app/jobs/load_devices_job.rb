@@ -1,7 +1,6 @@
 class LoadDevicesJob < ApplicationJob
   queue_as :default
-  def perform(*_args)
-    # Do something later
+  def perform
     require 'csv'
     Device.destroy_all
     csv_devices = File.read('lib/assets/report.csv')
@@ -9,6 +8,7 @@ class LoadDevicesJob < ApplicationJob
     csv.each do |row|
       Device.create!(row.to_hash)
     end
-    puts "Devices Created"
+    puts "Devices created"
   end
 end
+
